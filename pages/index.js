@@ -34,10 +34,11 @@ export default function Home() {
       <QuizContainer>
         <Widget>
           <Widget.Header>
-              <h1>CSS Knowledge Quiz</h1>
+              <meta property="og:image" content={db.bg}/>
+              <h1>Quiz Sobre Liga da Justica</h1>
             </Widget.Header>
           <Widget.Content>
-            <p>lorem ipsum dolor sit amet...</p>
+            <p>Teste seu conhecimento sobre o universo DC</p>
           </Widget.Content>
         </Widget>
         <Widget>
