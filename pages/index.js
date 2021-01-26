@@ -33,8 +33,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <meta property="title" content={db.title} />
-        <meta property="image" content={db.bg} />
+        <meta property="og:title" content={db.title} />
+        <meta property="og:image" content={db.bg} />
       </Head>
       <QuizBackground backgroundImage={db.bg}>
         <QuizContainer>
