@@ -35,10 +35,11 @@ export default function Home() {
         <Widget>
           <Widget.Header>
               <meta property="og:image" content={db.bg}/>
-              <h1>Quiz Sobre Liga da Justica</h1>
+              <meta property="og:title" content={db.title}/>
+              <h1>{db.title}</h1>
             </Widget.Header>
           <Widget.Content>
-            <p>Teste seu conhecimento sobre o universo DC</p>
+            <p>{db.description}</p>
           </Widget.Content>
         </Widget>
         <Widget>
