@@ -40,6 +40,12 @@ export default function Footer(props) {
         <a href="https://www.alura.com.br/">
           <span>Imersão React da Alura</span>
         </a>
+        {' '}
+        por
+        {' '}
+        <a href="https://github.com/Levi-Magny">
+        <span>Levi Magny</span>
+        </a>
       </p>
     </FooterWrapper>
   );
