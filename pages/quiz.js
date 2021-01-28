@@ -14,17 +14,23 @@ function LoadWidget() {
   return (
     <Widget>
       <Widget.Header>
-        Carregando
+        Carregando ...
       </Widget.Header>
 
       <Widget.Content>
-        [Desafio do Loading...]
+        Loading ...
       </Widget.Content>
     </Widget>
   );
 }
 // Função que gera o widget de questão
-function QuestionWidget({ questionIndex, question, totalQuestions }) {
+function QuestionWidget({
+  questionIndex,
+  question,
+  totalQuestions,
+  onSubmit,
+}) {
+  const questionName = `question__${questionIndex}`;
   return (
     <Widget>
       <Widget.Header>
@@ -43,34 +49,98 @@ function QuestionWidget({ questionIndex, question, totalQuestions }) {
       />
       <Widget.Content>
         <h2>
-          Título
+          {question.title}
         </h2>
         <p>
-          Descrição
+          {question.description}
         </p>
-        <Button>
-          Confirmar
-        </Button>
+        <form
+          onSubmit={(infosDoEvento) => {
+            infosDoEvento.preventDefault();
+            onSubmit();
+          }}
+        >
+          {question.alternatives.map((alternative, alternativeIndex) => {
+            const alternativeId = `alternative___${alternativeIndex}`;
+            return (
+              <Widget.Topic
+                as="label"
+                htmlFor={alternativeId}
+              >
+                <input
+                  id={alternativeId}
+                  type="radio"
+                  name={questionName}
+                />
+                {alternative}
+              </Widget.Topic>
+            );
+          })}
+          {/* {<pre>
+            {JSON.stringify(question, null, 4)}
+          </pre>} */}
+          <Button>
+            Confirmar
+          </Button>
+        </form>
       </Widget.Content>
     </Widget>
   );
 }
 
+const screenStates = {
+  QUIZ: 'QUIZ',
+  LOADING: 'LOADING',
+  RESULT: 'RESULT',
+};
+
 export default function Quiz() {
+  const [screenState, setScreenState] = React.useState(screenStates.LOADING);
   const totalQuestions = db.questions.length;
-  const question = db.questions[0];
-  const questionIndex = 0;
+  const [currentQuestion, setcurrentQuestion] = React.useState(0);
+  const questionIndex = currentQuestion;
+  const question = db.questions[questionIndex];
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setScreenState(screenStates.QUIZ);
+    }, 1 * 1000);
+  }, []);
+
+  // ******** ciclo de vida do React ******** \\
+  // Nasce === didMount
+  // React.useEffect
+  // atualizado === willUpdate
+  // morre === willUnmount
+
+  // função que muda o estado da questão quando o botão 'próxima' é apertado
+  function handleSubmitQuiz() {
+    const nextQuestion = questionIndex + 1;
+    // Se não for a última questão
+    if (nextQuestion < totalQuestions) {
+      // incrementa o ídice da questão
+      setcurrentQuestion(nextQuestion);
+    } else {
+      // se não muda o estado da tela para mostrar o resultado.
+      setScreenState(screenStates.RESULT);
+    }
+  }
 
   return (
     <QuizBackground backgroundImage={db.bg2}>
       <QuizContainer>
         <QuizLogo />
-        <QuestionWidget
-          questionIndex={questionIndex}
-          question={question}
-          totalQuestions={totalQuestions}
-        />
-        <LoadWidget />
+        {screenState === screenStates.QUIZ && (
+          <QuestionWidget
+            questionIndex={questionIndex}
+            question={question}
+            totalQuestions={totalQuestions}
+            onSubmit={handleSubmitQuiz}
+          />
+        )}
+        {screenState === screenStates.LOADING && <LoadWidget />}
+
+        {screenState === screenStates.RESULT && <div> Você acertou X questões, Parabéns</div>}
       </QuizContainer>
     </QuizBackground>
   );

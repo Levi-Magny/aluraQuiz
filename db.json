@@ -5,25 +5,27 @@
     "description": "Teste seu conhecimento sobre o universo DC!",
     "questions": [
       {
-        "image": "https://i.pinimg.com/originals/15/6b/a9/156ba954195945b318192c62e240d92f.gif",
-        "title": "Como fazer um seletor por id via CSS?",
-        "description": "Essa é pra aquecer",
+        "image": "https://media1.tenor.com/images/adc3afdc313202bdf90a6b288259030b/tenor.gif?itemid=14544525",
+        "title": "Qual a identidade do Flash na animação 'Liga da Justiça Sem Limites'?",
+        "description": "Vamos começar com uma fácil!",
         "answer": 2,
         "alternatives": [
-          ".elemento",
-          "*elemento",
-          "#elemento",
-          "%elemento"
+          "Wally West",
+          "Barry Allen",
+          "Jay Garrick",
+          "Jesse Chambers"
         ]
       },
       {
-        "image": "https://media.giphy.com/media/13FrpeVH09Zrb2/giphy.gif",
-        "title": "Como fazer um background gradiente com css?",
-        "description": "Faz tempo em haha",
+        "image": "https://i.pinimg.com/originals/15/6b/a9/156ba954195945b318192c62e240d92f.gif",
+        "title": "Por que o Superman mata o coringa no arco INJUSTICE?",
+        "description": "Trágico!",
         "answer": 0,
         "alternatives": [
-           "background: linear-gradient(#e66465, #9198e5);",
-           "background: gradient(#e66465, #9198e5);"
+           "O Coringa capturou Jonathan e Martha Kent e Fez o Superman pensar que eles haviam sido mortos em um incêndio.",
+           "O Coringa invadiu uma escola e matou 215 crianças.",
+           "O Coringa usou o gás do medo do Espantalho para fazer com que Superman matasse Louis Lane que estava grávida de seu filho.",
+           "O Coringa usou uma arma de kriptonita roubada da LexCorp contra a Supergirl por engano, já que a confundiu com o Superman"
         ]
       }
     ],
