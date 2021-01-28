@@ -1,6 +1,7 @@
 {
     "bg": "https://wallpapercave.com/wp/wp3421271.jpg",
     "bg2": "https://images.alphacoders.com/241/thumb-1920-241901.jpg",
+    "loadingImg": "25.gif",
     "title": "Quiz Sobre Liga da Justica",
     "description": "Teste seu conhecimento sobre o universo DC!",
     "questions": [
@@ -8,7 +9,7 @@
         "image": "https://media1.tenor.com/images/adc3afdc313202bdf90a6b288259030b/tenor.gif?itemid=14544525",
         "title": "Qual a identidade do Flash na animação 'Liga da Justiça Sem Limites'?",
         "description": "Vamos começar com uma fácil!",
-        "answer": 2,
+        "answer": 0,
         "alternatives": [
           "Wally West",
           "Barry Allen",
@@ -20,7 +21,7 @@
         "image": "https://i.pinimg.com/originals/15/6b/a9/156ba954195945b318192c62e240d92f.gif",
         "title": "Por que o Superman mata o coringa no arco INJUSTICE?",
         "description": "Trágico!",
-        "answer": 0,
+        "answer": 2,
         "alternatives": [
            "O Coringa capturou Jonathan e Martha Kent e Fez o Superman pensar que eles haviam sido mortos em um incêndio.",
            "O Coringa invadiu uma escola e matou 215 crianças.",

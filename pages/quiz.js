@@ -18,19 +18,23 @@ function LoadWidget() {
       </Widget.Header>
 
       <Widget.Content>
-        Loading ...
+        <img alt="Loading" src={db.loadingImg} />
       </Widget.Content>
     </Widget>
   );
 }
 // Função que gera o widget de questão
 function QuestionWidget({
-  questionIndex,
-  question,
-  totalQuestions,
-  onSubmit,
+  questionIndex, // ídice da questão
+  question, // Objeto question
+  totalQuestions, // total de questões
+  onSubmit, // função para atualizar questão
 }) {
+  const [selectedAlternative, setSelectedAlternative] = React.useState(undefined);
+  const [isConfirmed, setIsConfirmed] = React.useState(false);
   const questionName = `question__${questionIndex}`;
+  const isCorrect = selectedAlternative === question.answer;
+  const hasSelected = selectedAlternative !== undefined;
   return (
     <Widget>
       <Widget.Header>
@@ -57,20 +61,27 @@ function QuestionWidget({
         <form
           onSubmit={(infosDoEvento) => {
             infosDoEvento.preventDefault();
-            onSubmit();
+            setIsConfirmed(true);
+            setTimeout(() => {
+              setIsConfirmed(false);
+              onSubmit();
+            }, 1 * 2000);
           }}
         >
           {question.alternatives.map((alternative, alternativeIndex) => {
+            // Ídice de cada alternativa - para ser usado pela label e na seleção.
             const alternativeId = `alternative___${alternativeIndex}`;
             return (
               <Widget.Topic
                 as="label"
+                key={alternativeId}
                 htmlFor={alternativeId}
               >
                 <input
                   id={alternativeId}
                   type="radio"
                   name={questionName}
+                  onChange={() => setSelectedAlternative(alternativeIndex)}
                 />
                 {alternative}
               </Widget.Topic>
@@ -79,9 +90,11 @@ function QuestionWidget({
           {/* {<pre>
             {JSON.stringify(question, null, 4)}
           </pre>} */}
-          <Button>
+          <Button type="submit" disabled={!hasSelected}>
             Confirmar
           </Button>
+          {isConfirmed && isCorrect && <p>Cê é bom mermo!</p>}
+          {isConfirmed && !isCorrect && <p>Erroooooou!</p>}
         </form>
       </Widget.Content>
     </Widget>
@@ -95,13 +108,17 @@ const screenStates = {
 };
 
 export default function Quiz() {
+// hook para alteração do estado da página (Loading, Quiz ou Result)
   const [screenState, setScreenState] = React.useState(screenStates.LOADING);
   const totalQuestions = db.questions.length;
+  // hook para alteração da questão atual
   const [currentQuestion, setcurrentQuestion] = React.useState(0);
   const questionIndex = currentQuestion;
   const question = db.questions[questionIndex];
 
+  // hook que indica para o react que será usado um efeito (no caso, atualizar o statePage)
   React.useEffect(() => {
+    // ao iniciar a página, o app espera 1s antes de mudar o estado
     setTimeout(() => {
       setScreenState(screenStates.QUIZ);
     }, 1 * 1000);
