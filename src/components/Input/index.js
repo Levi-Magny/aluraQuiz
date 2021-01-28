@@ -1,9 +1,10 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 
 const InputBase = styled.input`
-  width: 90%;
+  width: 100%;
   padding: 15px;
   font-size: 14px;
   border: 1px solid ${({ theme }) => theme.colors.primary};
@@ -14,7 +15,7 @@ const InputBase = styled.input`
   margin-bottom: 25px;
 `;
 
-export default function Input({onChange, placeholder}) {
+export default function Input({ onChange, placeholder }) {
   return (
     <div>
       <InputBase onChange={onChange} placeholder={placeholder} />

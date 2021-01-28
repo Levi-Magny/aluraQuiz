@@ -1,10 +1,11 @@
 {
     "bg": "https://wallpapercave.com/wp/wp3421271.jpg",
+    "bg2": "https://images.alphacoders.com/241/thumb-1920-241901.jpg",
     "title": "Quiz Sobre Liga da Justica",
     "description": "Teste seu conhecimento sobre o universo DC!",
     "questions": [
       {
-        "image": "https://media.giphy.com/media/xUOxf3yDKCuwpOlT3i/giphy.gif",
+        "image": "https://i.pinimg.com/originals/15/6b/a9/156ba954195945b318192c62e240d92f.gif",
         "title": "Como fazer um seletor por id via CSS?",
         "description": "Essa é pra aquecer",
         "answer": 2,
