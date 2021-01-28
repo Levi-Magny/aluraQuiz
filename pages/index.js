@@ -8,18 +8,8 @@ import QuizBackground from '../src/components/QuizBackground';
 import QuizLogo from '../src/components/QuizLogo';
 import Footer from '../src/components/Footer';
 import GitHubCorner from '../src/components/GitHubCorner';
-
-// const Title = styled.h1`
-//   font-size: 50px;
-//   color: ${({ theme }) => theme.colors.primary};
-// `
-
-// const BackgroundImage = styled.div` //crase: é uma tagged function
-//   background-image: url(${db.bg});
-//   flex: 1;
-//   background-size: cover;
-//   background-position:center;
-// `;
+import Input from '../src/components/Input';
+import Button from '../src/components/Button';
 
 export const QuizContainer = styled.div`//container que conterá o quiz
   width: 100%;
@@ -54,19 +44,20 @@ export default function Home() {
               // router manda para a próxima página
             }}
             >
-              <input
-                onChange={function (evento) {
+              <Input
+                name="nomeDoUsuario"
+                onChange={(evento) => {
                   // state
-                  // name = evento.target.value;
                   setName(evento.target.value);
                 }}
                 placeholder="Fala seu nome aí..."
+                value={name}
               />
-              <button type="submit" disabled={name.length === 0}>
+              <Button type="submit" disabled={name.length === 0}>
                 Jogar
                 {' '}
                 {name}
-              </button>
+              </Button>
             </form>
           </Widget.Content>
         </Widget>
