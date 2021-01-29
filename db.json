@@ -2,7 +2,7 @@
     "bg": "https://wallpapercave.com/wp/wp3421271.jpg",
     "bg2": "https://images.alphacoders.com/241/thumb-1920-241901.jpg",
     "loadingImg": "25.gif",
-    "title": "Quiz Sobre Liga da Justica",
+    "title": "Quiz Sobre Liga da Justiça",
     "description": "Teste seu conhecimento sobre o universo DC!",
     "questions": [
       {
@@ -27,6 +27,42 @@
            "O Coringa invadiu uma escola e matou 215 crianças.",
            "O Coringa usou o gás do medo do Espantalho para fazer com que Superman matasse Louis Lane que estava grávida de seu filho.",
            "O Coringa usou uma arma de kriptonita roubada da LexCorp contra a Supergirl por engano, já que a confundiu com o Superman"
+        ]
+      },
+      {
+        "image": "https://pa1.narvii.com/6545/e77340850a368a71164ada21777d728c44a003c8_hq.gif",
+        "title": "Na história 'Morte em Família', qual desses personagens morre?",
+        "description": "A dica foi dada! :D",
+        "answer": 1,
+        "alternatives": [
+          "Dick Grayson - Robin",
+          "Jason Todd - Robin",
+          "Bárbara Gordon - Batgirl",
+          "Comissário Gordon"
+        ]
+      },
+      {
+        "image": "https://i.imgur.com/6WpjS99.gif",
+        "title": "Como o flash (Jay Garrick) ganhou seus poderes?",
+        "description": "Essa é meio hard",
+        "answer": 3,
+        "alternatives": [
+          "Atingido por um raio e banhado por produtos químicos em um laboratório forence.",
+          "Foi eletrocutado em uma banheira Durante uma tempestade solar.",
+          "Foi afetado por uma explosão de matéria escura, causada por um acidente em um acelerador de partículas.",
+          "Inalou gases desconhecidos causados por reações de um líquido conhecido como 'Água Pesada'."
+        ]
+      },
+      {
+        "image": "https://media3.giphy.com/media/l3mZhU2ZR74qjkhsA/giphy.gif",
+        "title": "''Eu sou entropia. Eu sou a morte. Eu sou...''",
+        "description": "HAHAHAHA",
+        "answer": 1,
+        "alternatives": [
+          "O BATMAN.",
+          "O DARKSEID.",
+          "O CHAPOLIN COLORADO.",
+          "O HOMEM DE FERRO."
         ]
       }
     ],
