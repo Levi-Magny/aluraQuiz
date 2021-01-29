@@ -1,10 +1,10 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable react/prop-types */
 import React from 'react';
-// import { useRouter } from 'next/router';// hook do Next.js para rotas
 
 import db from '../db.json';
 import Widget from '../src/components/Widget';
+import AlternativeForm from '../src/components/AlternativeForm';
 import QuizBackground from '../src/components/QuizBackground';
 import QuizContainer from '../src/components/QuizContainer';
 import QuizLogo from '../src/components/QuizLogo';
@@ -29,7 +29,7 @@ function ResultWidget({ results }) {
       <Widget.Content>
         <p>{ `Você acertou ${countRightAns} ${countRightAns > 1 ? 'Questões' : 'Questão'}!` }</p>
         {results.map((result, index) => (
-          <Widget.Result>
+          <Widget.Result key={`result__${result}`}>
             <p>{`QUESTÃO ${index + 1}: ${result === true ? 'Resposta Certa!' : 'Resposta Errada!'}`}</p>
           </Widget.Result>
         ))}
@@ -87,7 +87,7 @@ function QuestionWidget({
         <p>
           {question.description}
         </p>
-        <form
+        <AlternativeForm
           onSubmit={(infosDoEvento) => {
             infosDoEvento.preventDefault();
             setIsConfirmed(true);
@@ -103,14 +103,17 @@ function QuestionWidget({
             // Ídice de cada alternativa - para ser usado pela label e na seleção.
             const alternativeId = `alternative___${alternativeIndex}`;
             const isSelected = selectedAlternative === alternativeIndex;
+            const AlternativeStatus = isCorrect ? 'SUCCESS' : 'ERROR';
             return (
               <Widget.Topic
                 as="label"
                 key={alternativeId}
                 htmlFor={alternativeId}
                 data-isselected={isSelected}
+                data-status={isConfirmed && isSelected && AlternativeStatus}
               >
                 <input
+                  style={{ display: 'none' }}
                   id={alternativeId}
                   type="radio"
                   name={questionName}
@@ -128,7 +131,7 @@ function QuestionWidget({
           </Button>
           {isConfirmed && isCorrect && <p>Cê é bom mermo!</p>}
           {isConfirmed && !isCorrect && <p>Erroooooou!</p>}
-        </form>
+        </AlternativeForm>
       </Widget.Content>
     </Widget>
   );
