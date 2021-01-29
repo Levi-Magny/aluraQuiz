@@ -65,6 +65,19 @@ Widget.Topic = styled.a`
   &:focus {
     opacity: .5;
   }
+  
 `;
 
+Widget.Result = styled.div`
+  background-color: ${({ theme }) => `${theme.colors.primary}40`};
+  padding: 2px 15px;
+  margin-bottom: 8px;
+  border-radius: ${({ theme }) => theme.borderRadius};
+  display: block;
+
+  & > *:first-child {
+    color: ${({ theme }) => `${theme.colors.contrastText}`};
+    font-size: 14px;
+  }
+`;
 export default Widget;

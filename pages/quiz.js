@@ -10,6 +10,34 @@ import QuizContainer from '../src/components/QuizContainer';
 import QuizLogo from '../src/components/QuizLogo';
 import Button from '../src/components/Button';
 
+function ResultWidget({ results }) {
+  const countRightAns = results.filter((x) => x).length;
+  return (
+    <Widget>
+      <Widget.Header>
+        RESULTADO:
+      </Widget.Header>
+      <img
+        alt="Descrição"
+        style={{
+          width: '100%',
+          height: '150px',
+          objectFit: 'cover',
+        }}
+        src="https://i.pinimg.com/originals/25/7d/3a/257d3afd123f2b88a6832067819596ef.gif"
+      />
+      <Widget.Content>
+        <p>{ `Você acertou ${countRightAns} ${countRightAns > 1 ? 'Questões' : 'Questão'}!` }</p>
+        {results.map((result, index) => (
+          <Widget.Result>
+            <p>{`QUESTÃO ${index + 1}: ${result === true ? 'Resposta Certa!' : 'Resposta Errada!'}`}</p>
+          </Widget.Result>
+        ))}
+      </Widget.Content>
+    </Widget>
+  );
+}
+
 function LoadWidget() {
   return (
     <Widget>
@@ -29,6 +57,7 @@ function QuestionWidget({
   question, // Objeto question
   totalQuestions, // total de questões
   onSubmit, // função para atualizar questão
+  addResult,
 }) {
   const [selectedAlternative, setSelectedAlternative] = React.useState(undefined);
   const [isConfirmed, setIsConfirmed] = React.useState(false);
@@ -63,7 +92,9 @@ function QuestionWidget({
             infosDoEvento.preventDefault();
             setIsConfirmed(true);
             setTimeout(() => {
+              addResult(isCorrect);
               setIsConfirmed(false);
+              setSelectedAlternative(undefined);
               onSubmit();
             }, 1 * 2000);
           }}
@@ -71,11 +102,13 @@ function QuestionWidget({
           {question.alternatives.map((alternative, alternativeIndex) => {
             // Ídice de cada alternativa - para ser usado pela label e na seleção.
             const alternativeId = `alternative___${alternativeIndex}`;
+            const isSelected = selectedAlternative === alternativeIndex;
             return (
               <Widget.Topic
                 as="label"
                 key={alternativeId}
                 htmlFor={alternativeId}
+                data-isselected={isSelected}
               >
                 <input
                   id={alternativeId}
@@ -110,11 +143,19 @@ const screenStates = {
 export default function Quiz() {
 // hook para alteração do estado da página (Loading, Quiz ou Result)
   const [screenState, setScreenState] = React.useState(screenStates.LOADING);
+  const [results, setResults] = React.useState([]);
   const totalQuestions = db.questions.length;
   // hook para alteração da questão atual
   const [currentQuestion, setcurrentQuestion] = React.useState(0);
   const questionIndex = currentQuestion;
   const question = db.questions[questionIndex];
+
+  function addResult(result) {
+    setResults([
+      ...results,
+      result,
+    ]);
+  }
 
   // hook que indica para o react que será usado um efeito (no caso, atualizar o statePage)
   React.useEffect(() => {
@@ -153,11 +194,12 @@ export default function Quiz() {
             question={question}
             totalQuestions={totalQuestions}
             onSubmit={handleSubmitQuiz}
+            addResult={addResult}
           />
         )}
         {screenState === screenStates.LOADING && <LoadWidget />}
 
-        {screenState === screenStates.RESULT && <div> Você acertou X questões, Parabéns</div>}
+        {screenState === screenStates.RESULT && <ResultWidget results={results} />}
       </QuizContainer>
     </QuizBackground>
   );
