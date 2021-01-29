@@ -2,14 +2,14 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useRouter } from 'next/router';
-
-import db from '../db.json';
-import Widget from '../src/components/Widget';
-import AlternativeForm from '../src/components/AlternativeForm';
-import QuizBackground from '../src/components/QuizBackground';
-import QuizContainer from '../src/components/QuizContainer';
-import QuizLogo from '../src/components/QuizLogo';
-import Button from '../src/components/Button';
+// import db from '../../../db.json';
+import Widget from '../../components/Widget';
+import AlternativeForm from '../../components/AlternativeForm';
+import QuizBackground from '../../components/QuizBackground';
+import QuizContainer from '../../components/QuizContainer';
+import QuizLogo from '../../components/QuizLogo';
+import Button from '../../components/Button';
+import BackLinkArrow from '../../components/BackLinkArow';
 
 function ResultWidget({ results, userName }) {
   const countRightAns = results.filter((x) => x).length;
@@ -52,7 +52,7 @@ function LoadWidget() {
       <Widget.Content>
         <img
           alt="Loading"
-          src={db.loadingImg}
+          src="../../../25.gif"
         />
       </Widget.Content>
     </Widget>
@@ -75,6 +75,7 @@ function QuestionWidget({
   return (
     <Widget>
       <Widget.Header>
+        <BackLinkArrow href="/" />
         <h3>
           {`Pergunta ${questionIndex + 1} de ${totalQuestions}`}
         </h3>
@@ -129,6 +130,7 @@ function QuestionWidget({
                   type="radio"
                   name={questionName}
                   onChange={() => setSelectedAlternative(alternativeIndex)}
+                  checked={isSelected}
                 />
                 {alternative}
               </Widget.Topic>
@@ -154,17 +156,18 @@ const screenStates = {
   RESULT: 'RESULT',
 };
 
-export default function Quiz() {
+export default function Quiz({ externalQuestions, externalBg }) {
 // hook para alteração do estado da página (Loading, Quiz ou Result)
   const [screenState, setScreenState] = React.useState(screenStates.LOADING);
   const [results, setResults] = React.useState([]);
-  const totalQuestions = db.questions.length;
+  const totalQuestions = externalQuestions.length;
   // hook para alteração da questão atual
   const [currentQuestion, setcurrentQuestion] = React.useState(0);
   const questionIndex = currentQuestion;
-  const question = db.questions[questionIndex];
+  const question = externalQuestions[questionIndex];
   const router = useRouter();
   const nameUser = router.query;
+  const bg = externalBg;
 
   function addResult(result) {
     setResults([
@@ -201,7 +204,7 @@ export default function Quiz() {
   }
 
   return (
-    <QuizBackground backgroundImage={db.bg2}>
+    <QuizBackground backgroundImage={bg}>
       <QuizContainer>
         <QuizLogo />
         {screenState === screenStates.QUIZ && (

@@ -4,7 +4,8 @@ import styled from 'styled-components';
 const AlternativeForm = styled.form`
     label {
         &[data-isselected="true"] {
-            background-color: ${({ theme }) => theme.colors.selected};
+            /*  ${({ theme }) => theme.colors.selected}; */
+            background-color: #1C6E8C;
         }
         &[data-status="SUCCESS"],
         &[data-right="true"] {

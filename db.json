@@ -67,7 +67,11 @@
       }
     ],
     "external": [
-      ""
+      "https://strangerquiz.felipeoes.vercel.app/",
+      "https://flash-quiz-next.davidlpc1.vercel.app/",
+      "https://biblequiz.epsilveira.vercel.app/",
+      "https://doctor-who-quiz.emanuelpna.vercel.app/"
+
     ],
     "theme": {
       "colors": {

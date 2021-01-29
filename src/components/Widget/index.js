@@ -51,6 +51,7 @@ Widget.Content = styled.div`//adicionando alguns estilos para os conteúdos
 
 Widget.Topic = styled.a`
   outline: 0;
+  text-align: left;
   text-decoration: none;
   color: ${({ theme }) => theme.colors.contrastText};
   background-color: ${({ theme }) => `${theme.colors.primary}40`};
