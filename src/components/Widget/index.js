@@ -36,8 +36,8 @@ Widget.Header = styled.div`//div que engloba o título
 
 Widget.Content = styled.div`//adicionando alguns estilos para os conteúdos
   padding: 24px 32px 32px 32px;
+  text-align: center;
   & > *:first-child {
-    margin-top: 0;
     line-height: 1.2;
   }
   & > *:last-child {
@@ -74,6 +74,10 @@ Widget.Result = styled.div`
   margin-bottom: 8px;
   border-radius: ${({ theme }) => theme.borderRadius};
   display: block;
+
+  &[data-correct="true"] {
+    background-color: ${({ theme }) => theme.colors.success};
+  }
 
   & > *:first-child {
     color: ${({ theme }) => `${theme.colors.contrastText}`};

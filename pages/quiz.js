@@ -1,6 +1,7 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { useRouter } from 'next/router';
 
 import db from '../db.json';
 import Widget from '../src/components/Widget';
@@ -10,7 +11,7 @@ import QuizContainer from '../src/components/QuizContainer';
 import QuizLogo from '../src/components/QuizLogo';
 import Button from '../src/components/Button';
 
-function ResultWidget({ results }) {
+function ResultWidget({ results, userName }) {
   const countRightAns = results.filter((x) => x).length;
   return (
     <Widget>
@@ -27,9 +28,12 @@ function ResultWidget({ results }) {
         src="https://i.pinimg.com/originals/25/7d/3a/257d3afd123f2b88a6832067819596ef.gif"
       />
       <Widget.Content>
-        <p>{ `Você acertou ${countRightAns} ${countRightAns > 1 ? 'Questões' : 'Questão'}!` }</p>
+        <p>{ `${userName}, você acertou ${countRightAns} ${countRightAns > 1 ? 'Questões' : 'Questão'}!` }</p>
         {results.map((result, index) => (
-          <Widget.Result key={`result__${result}`}>
+          <Widget.Result
+            key={`result__${result}`}
+            data-correct={result}
+          >
             <p>{`QUESTÃO ${index + 1}: ${result === true ? 'Resposta Certa!' : 'Resposta Errada!'}`}</p>
           </Widget.Result>
         ))}
@@ -46,7 +50,10 @@ function LoadWidget() {
       </Widget.Header>
 
       <Widget.Content>
-        <img alt="Loading" src={db.loadingImg} />
+        <img
+          alt="Loading"
+          src={db.loadingImg}
+        />
       </Widget.Content>
     </Widget>
   );
@@ -152,6 +159,8 @@ export default function Quiz() {
   const [currentQuestion, setcurrentQuestion] = React.useState(0);
   const questionIndex = currentQuestion;
   const question = db.questions[questionIndex];
+  const router = useRouter();
+  const nameUser = router.query;
 
   function addResult(result) {
     setResults([
@@ -202,7 +211,8 @@ export default function Quiz() {
         )}
         {screenState === screenStates.LOADING && <LoadWidget />}
 
-        {screenState === screenStates.RESULT && <ResultWidget results={results} />}
+        {screenState === screenStates.RESULT
+        && <ResultWidget results={results} userName={nameUser.name} />}
       </QuizContainer>
     </QuizBackground>
   );
