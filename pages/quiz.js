@@ -68,6 +68,7 @@ function QuestionWidget({
 }) {
   const [selectedAlternative, setSelectedAlternative] = React.useState(undefined);
   const [isConfirmed, setIsConfirmed] = React.useState(false);
+  const [rightAlternative, setRightAlternative] = React.useState(undefined);
   const questionName = `question__${questionIndex}`;
   const isCorrect = selectedAlternative === question.answer;
   const hasSelected = selectedAlternative !== undefined;
@@ -98,8 +99,10 @@ function QuestionWidget({
           onSubmit={(infosDoEvento) => {
             infosDoEvento.preventDefault();
             setIsConfirmed(true);
+            setRightAlternative(true);
             setTimeout(() => {
               addResult(isCorrect);
+              setRightAlternative(undefined);
               setIsConfirmed(false);
               setSelectedAlternative(undefined);
               onSubmit();
@@ -118,6 +121,7 @@ function QuestionWidget({
                 htmlFor={alternativeId}
                 data-isselected={isSelected}
                 data-status={isConfirmed && isSelected && AlternativeStatus}
+                data-right={isConfirmed && alternativeIndex === question.answer && rightAlternative}
               >
                 <input
                   style={{ display: 'none' }}
