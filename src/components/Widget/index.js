@@ -88,6 +88,10 @@ Widget.Result = styled.div`
   & > *:first-child {
     color: ${({ theme }) => `${theme.colors.contrastText}`};
     font-size: 14px;
+    margin: 10px auto;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 1.3;
   }
 `;
 Widget.Warning = styled.div`

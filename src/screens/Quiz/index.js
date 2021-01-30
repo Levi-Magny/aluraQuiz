@@ -14,25 +14,49 @@ import QuizLogo from '../../components/QuizLogo';
 import Button from '../../components/Button';
 import BackLinkArrow from '../../components/BackLinkArow';
 
+const ResultMessage = {
+  INITIAL: ['Calculando...', 'https://media4.giphy.com/media/L05HgB2h6qICDs5Sms/giphy.gif'],
+  FAIL: ['Você falhou com esse quiz!!!', 'https://hips.hearstapps.com/digitalspyuk.cdnds.net/18/28/1531498449-giphy-36.gif?resize=480:*'],
+  NOTBAD: ['Você é quase um Jovem Titã!!!', 'https://i.pinimg.com/originals/30/8c/b1/308cb15b423a6588910ee97f61969c2d.gif'],
+  SUCCESS: ['Você foi eleito membro efetivo da Liga da Justiça', 'https://31.media.tumblr.com/tumblr_m9blkdPyBr1rd1k88o1_500.gif'],
+};
+
 function ResultWidget({ results, userName }) {
-  const countRightAns = results.filter((x) => x).length;
+  // const countRightAns = results.filter((x) => x !== 0).length;
+  const Score = Math.floor(results.reduce((score, weight) => score + weight, 0) * 100);
+  const [[scoreMessage, scoreAnimation], setScoreMessage] = React.useState(ResultMessage.INITIAL);
+
+  React.useEffect(() => {
+    // ao iniciar a página, o app espera 1s antes de mudar o estado
+    if (Score > 90) {
+      setScoreMessage(ResultMessage.SUCCESS);
+    } else if (Score >= 60) {
+      setScoreMessage(ResultMessage.NOTBAD);
+    } else {
+      setScoreMessage(ResultMessage.FAIL);
+    }
+  }, []);
+
   return (
     <Widget>
       <Widget.Header>
         <BackLinkArrow href="/" />
         RESULTADO:
       </Widget.Header>
-      <img
-        alt="Descrição"
-        style={{
-          width: '100%',
-          height: '150px',
-          objectFit: 'cover',
-        }}
-        src="https://i.pinimg.com/originals/25/7d/3a/257d3afd123f2b88a6832067819596ef.gif"
-      />
+      <Widget.Result>
+        <h2>{scoreMessage}</h2>
+        <img
+          alt="Descrição"
+          style={{
+            width: '100%',
+            height: '150px',
+            objectFit: 'cover',
+          }}
+          src={scoreAnimation}
+        />
+      </Widget.Result>
       <Widget.Content>
-        <p>{ `${userName}, você acertou ${countRightAns} ${countRightAns > 1 ? 'Questões' : 'Questão'}!` }</p>
+        <p>{ `${userName}, você fez ${Score} ${(Score > 1 || Score === 0) ? 'Pontos' : 'Ponto'}!` }</p>
         {results.map((result, index) => (
           <Widget.Result
             as={motion.label}
@@ -44,9 +68,9 @@ function ResultWidget({ results, userName }) {
             initial="hidden"
             animate="show"
             key={`result__${result}`}
-            data-correct={result}
+            data-correct={result > 0}
           >
-            <p>{`QUESTÃO ${index + 1}: ${result === true ? 'Resposta Certa!' : 'Resposta Errada!'}`}</p>
+            <p>{`QUESTÃO ${index + 1}: ${result > 0 ? 'Resposta Certa!' : 'Resposta Errada!'}`}</p>
           </Widget.Result>
         ))}
       </Widget.Content>
@@ -214,7 +238,7 @@ export default function Quiz({
   function addResult(result) {
     setResults([
       ...results,
-      result,
+      (result ? (questionIndex + 1) / 10 : 0),
     ]);
   }
 
