@@ -3,6 +3,8 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
+import Lottie from 'react-lottie';
+import animationData from '../../public/loading2.json';
 import db from '../../db.json';
 import Widget from '../../src/components/Widget';
 import AlternativeForm from '../../src/components/AlternativeForm';
@@ -17,6 +19,7 @@ function ResultWidget({ results, userName }) {
   return (
     <Widget>
       <Widget.Header>
+        <BackLinkArrow href="/" />
         RESULTADO:
       </Widget.Header>
       <img
@@ -44,6 +47,22 @@ function ResultWidget({ results, userName }) {
 }
 
 function LoadWidget() {
+  const [animationState, setAnimationState] = React.useState({
+    isStopped: true, isPaused: true,
+  });
+
+  React.useEffect(() => {
+    setAnimationState({ isStopped: false, isPaused: false });
+  }, []);
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
   return (
     <Widget>
       <Widget.Header>
@@ -51,10 +70,17 @@ function LoadWidget() {
       </Widget.Header>
 
       <Widget.Content>
-        <img
+        <Lottie
+          options={defaultOptions}
+          height={100}
+          width={200}
+          isStopped={animationState.isStopped}
+          isPaused={animationState.isPaused}
+        />
+        {/* <img
           alt="Loading"
           src={db.loadingImg}
-        />
+        /> */}
       </Widget.Content>
     </Widget>
   );
@@ -181,7 +207,7 @@ export default function Quiz() {
     // ao iniciar a página, o app espera 1s antes de mudar o estado
     setTimeout(() => {
       setScreenState(screenStates.QUIZ);
-    }, 1 * 1000);
+    }, 3.5 * 1000);
   }, []);
 
   // ******** ciclo de vida do React ******** \\

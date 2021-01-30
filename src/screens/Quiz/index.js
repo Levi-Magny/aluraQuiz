@@ -3,6 +3,8 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 // import db from '../../../db.json';
+import Lottie from 'react-lottie';
+import animationData from '../../../public/loading2.json';
 import Widget from '../../components/Widget';
 import AlternativeForm from '../../components/AlternativeForm';
 import QuizBackground from '../../components/QuizBackground';
@@ -16,6 +18,7 @@ function ResultWidget({ results, userName }) {
   return (
     <Widget>
       <Widget.Header>
+        <BackLinkArrow href="/" />
         RESULTADO:
       </Widget.Header>
       <img
@@ -43,6 +46,22 @@ function ResultWidget({ results, userName }) {
 }
 
 function LoadWidget() {
+  const [animationState, setAnimationState] = React.useState({
+    isStopped: true, isPaused: true,
+  });
+
+  React.useEffect(() => {
+    setAnimationState({ isStopped: false, isPaused: false });
+  }, []);
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
   return (
     <Widget>
       <Widget.Header>
@@ -50,9 +69,12 @@ function LoadWidget() {
       </Widget.Header>
 
       <Widget.Content>
-        <img
-          alt="Loading"
-          src="../../../25.gif"
+        <Lottie
+          options={defaultOptions}
+          height={100}
+          width={200}
+          isStopped={animationState.isStopped}
+          isPaused={animationState.isPaused}
         />
       </Widget.Content>
     </Widget>

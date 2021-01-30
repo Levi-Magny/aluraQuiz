@@ -8,10 +8,12 @@
     "eslint:init": "eslint --init"
   },
   "dependencies": {
+    "framer-motion": "^3.2.2-rc.1",
     "next": "latest",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-is": "^16.8.0",
+    "react-lottie": "^1.2.3",
     "styled-components": "^5.0.0"
   },
   "devDependencies": {
