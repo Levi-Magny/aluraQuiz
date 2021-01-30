@@ -4,6 +4,7 @@ import React from 'react';
 // import { useRouter } from 'next/router';
 // import db from '../../../db.json';
 import Lottie from 'react-lottie';
+import { motion } from 'framer-motion';
 import animationData from '../../../public/loading2.json';
 import Widget from '../../components/Widget';
 import AlternativeForm from '../../components/AlternativeForm';
@@ -34,6 +35,14 @@ function ResultWidget({ results, userName }) {
         <p>{ `${userName}, você acertou ${countRightAns} ${countRightAns > 1 ? 'Questões' : 'Questão'}!` }</p>
         {results.map((result, index) => (
           <Widget.Result
+            as={motion.label}
+            transition={{ delay: (index) / 10, duration: 0.4 }}
+            variants={{
+              show: { opacity: 1, x: '0' },
+              hidden: { opacity: 0, x: '-30%' },
+            }}
+            initial="hidden"
+            animate="show"
             key={`result__${result}`}
             data-correct={result}
           >
@@ -139,7 +148,15 @@ function QuestionWidget({
             const AlternativeStatus = isCorrect ? 'SUCCESS' : 'ERROR';
             return (
               <Widget.Topic
-                as="label"
+                // as="label"
+                as={motion.label}
+                transition={{ delay: (alternativeIndex) / 15, duration: 0.2 }}
+                variants={{
+                  show: { opacity: 1, x: '0' },
+                  hidden: { opacity: 0, x: '-30%' },
+                }}
+                initial="hidden"
+                animate="show"
                 key={alternativeId}
                 htmlFor={alternativeId}
                 data-isselected={isSelected}

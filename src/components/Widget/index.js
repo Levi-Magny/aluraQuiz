@@ -69,6 +69,7 @@ Widget.Topic = styled.a`
   
   &[data-disabled="true"] {
     background-color: #4a4a4a;
+    cursor: not-allowed;
     opacity: .4;
   }
 `;

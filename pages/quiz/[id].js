@@ -10,7 +10,7 @@ export default function QuizDaGalera({ dbExterno, playerName }) {
     <ThemeProvider theme={dbExterno.theme}>
       <QuizScreen
         externalQuestions={dbExterno.questions}
-        externalBg={dbExterno.bg}
+        externalBg={dbExterno.bg2 || dbExterno.bg}
         playerName={playerName}
       />
     </ThemeProvider>
@@ -19,7 +19,11 @@ export default function QuizDaGalera({ dbExterno, playerName }) {
 
 export async function getServerSideProps(context) {
   const [projectName, userName, playerName] = context.query.id.split('___');
-  const dbExterno = await fetch(`https://${projectName}.${userName}.vercel.app/api/db`)
+  const url = (projectName === 'self'
+    ? 'https://quiz-justiceleague.levi-magny.vercel.app/api/db'
+    : `https://${projectName}.${userName}.vercel.app/api/db`);
+
+  const dbExterno = await fetch(url)
     .then((respostaDoServer) => {
       if (respostaDoServer.ok) {
         return respostaDoServer.json();

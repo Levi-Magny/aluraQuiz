@@ -37,7 +37,8 @@ export default function Home() {
           <Widget.Content>
             <form onSubmit={(e) => {
               e.preventDefault();
-              router.push(`/quiz?name=${name}`);
+              // router.push(`/quiz?name=${name}`);
+              router.push(`/quiz/self___Levi___${name}`);
               // eslint-disable-next-line no-console
               console.log('Indo para a página do quiz');
 
