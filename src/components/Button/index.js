@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Button = styled.button`
     background-color: ${({ theme }) => theme.colors.secondary};
-    color: ${({ theme }) => theme.colors.mainBg};
+    color: ${({ theme }) => theme.colors.contrastText};
     border-radius: ${({ theme }) => theme.borderRadius};
     border: 0;
 
@@ -24,7 +24,7 @@ const Button = styled.button`
     }
 
     &:disabled {
-        background-color: #979797;
+        background-color: #676767;
         cursor: not-allowed;
     }
 `;

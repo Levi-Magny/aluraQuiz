@@ -67,6 +67,7 @@
       }
     ],
     "external": [
+      "https://lotr-quiz.filipe1309.vercel.app/",
       "https://supernatural-quiz.pedro-murilo.vercel.app/",
       "https://flash-quiz-next.davidlpc1.vercel.app/",
       "https://biblequiz.epsilveira.vercel.app/",
@@ -76,7 +77,7 @@
     "theme": {
       "colors": {
         "primary": "#930103",
-        "secondary": "#e0d900",
+        "secondary": "#8F8A00",
         "mainBg": "#101010",
         "contrastText": "#FFFFFF",
         "wrong": "#FF5722",

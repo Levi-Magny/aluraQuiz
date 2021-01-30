@@ -5,19 +5,20 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import QuizScreen from '../../src/screens/Quiz';
 
-export default function QuizDaGalera({ dbExterno }) {
+export default function QuizDaGalera({ dbExterno, playerName }) {
   return (
     <ThemeProvider theme={dbExterno.theme}>
       <QuizScreen
         externalQuestions={dbExterno.questions}
         externalBg={dbExterno.bg}
+        playerName={playerName}
       />
     </ThemeProvider>
   );
 }
 
 export async function getServerSideProps(context) {
-  const [projectName, userName] = context.query.id.split('___');
+  const [projectName, userName, playerName] = context.query.id.split('___');
   const dbExterno = await fetch(`https://${projectName}.${userName}.vercel.app/api/db`)
     .then((respostaDoServer) => {
       if (respostaDoServer.ok) {
@@ -36,6 +37,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       dbExterno,
+      playerName,
     },
   };
 }

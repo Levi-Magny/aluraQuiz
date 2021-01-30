@@ -54,10 +54,11 @@ export default function Home() {
                 value={name}
               />
               <Button type="submit" disabled={name.length === 0}>
-                Jogar
-                {' '}
-                {name}
+                {`Vamos começar ${name}${name ? '?' : ''}`}
               </Button>
+              <Widget.Warning>
+                <p data-disabled={name.length === 0}>Warning: Insira um nome para continuar!</p>
+              </Widget.Warning>
             </form>
           </Widget.Content>
         </Widget>
@@ -82,7 +83,8 @@ export default function Home() {
                   <li key={linkExterno}>
                     <Widget.Topic
                       as={Link}
-                      href={`/quiz/${projectName}___${userName || ''}`}
+                      data-disabled={name.length === 0}
+                      href={name.length === 0 ? '/' : `/quiz/${projectName}___${userName || ''}___${name}`}
                     >
                       {`${userName || ''}/${projectName}`}
                     </Widget.Topic>

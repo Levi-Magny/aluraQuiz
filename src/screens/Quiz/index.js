@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 // import db from '../../../db.json';
 import Lottie from 'react-lottie';
 import animationData from '../../../public/loading2.json';
@@ -178,7 +178,11 @@ const screenStates = {
   RESULT: 'RESULT',
 };
 
-export default function Quiz({ externalQuestions, externalBg }) {
+export default function Quiz({
+  externalQuestions,
+  externalBg,
+  playerName,
+}) {
 // hook para alteração do estado da página (Loading, Quiz ou Result)
   const [screenState, setScreenState] = React.useState(screenStates.LOADING);
   const [results, setResults] = React.useState([]);
@@ -187,8 +191,7 @@ export default function Quiz({ externalQuestions, externalBg }) {
   const [currentQuestion, setcurrentQuestion] = React.useState(0);
   const questionIndex = currentQuestion;
   const question = externalQuestions[questionIndex];
-  const router = useRouter();
-  const nameUser = router.query;
+  const nameUser = playerName;
   const bg = externalBg;
 
   function addResult(result) {
@@ -241,7 +244,7 @@ export default function Quiz({ externalQuestions, externalBg }) {
         {screenState === screenStates.LOADING && <LoadWidget />}
 
         {screenState === screenStates.RESULT
-        && <ResultWidget results={results} userName={nameUser.name} />}
+        && <ResultWidget results={results} userName={nameUser} />}
       </QuizContainer>
     </QuizBackground>
   );

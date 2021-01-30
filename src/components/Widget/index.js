@@ -67,6 +67,10 @@ Widget.Topic = styled.a`
     opacity: .5;
   }
   
+  &[data-disabled="true"] {
+    background-color: #4a4a4a;
+    opacity: .4;
+  }
 `;
 
 Widget.Result = styled.div`
@@ -83,6 +87,23 @@ Widget.Result = styled.div`
   & > *:first-child {
     color: ${({ theme }) => `${theme.colors.contrastText}`};
     font-size: 14px;
+  }
+`;
+Widget.Warning = styled.div`
+  background-color: transparent;
+  margin: 10px auto;
+  border-radius: 5px;
+  border: none;
+  padding: 0px 2px;
+  width: 95%;
+
+  p {
+    color: ${({ theme }) => theme.colors.wrong};
+    font-weight: 500;
+    margin: 0;
+  }
+  [data-disabled="false"] {
+    display: none;
   }
 `;
 export default Widget;
